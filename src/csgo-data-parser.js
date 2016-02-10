@@ -163,6 +163,7 @@ class CSGODataParser {
 		var skins;
 	 	var icons = this.itemsData.items_game.alternate_icons2.weapon_icons;
 		(indexed ? skins={} : skins=[]);
+		var wepName = self._getWeaponNameFromTechnicalName(techName);
 	 	Object.keys(icons).forEach(function(key){
 	 		var skin = new SkinPaint();
 	 		var datas = self._cleanCompositeIconName(icons[key].icon_path, techName);
@@ -176,10 +177,10 @@ class CSGODataParser {
 						'weaponTechName':techName
 					};	
 					if (type === '#CSGO_Type_Knife') {
-						skins[i].fullName = '★ ' + self._getWeaponNameFromTechnicalName(techName) + ' | ' + skins[i].name;
+						skins[i].fullName = '★ ' + wepName + ' | ' + skins[i].name;
 						skins[i].rarity = 'unusual';
 					} else {
-						skins[i].fullName = '' + self._getWeaponNameFromTechnicalName(techName) + ' | ' + skins[i].name;
+						skins[i].fullName = '' + wepName + ' | ' + skins[i].name;
 						skins[i].rarity = self._getRarityFromPaintTechnicalName(datas.skinTechName);
 					}
 				}else{
@@ -189,10 +190,10 @@ class CSGODataParser {
 					skin.defIndex = skinInfo[1];
 					//Hack for melee weapon :s
 					if (type === '#CSGO_Type_Knife') {
-						skin.fullName = '★ ' + self._getWeaponNameFromTechnicalName(techName) + ' | ' + skin.name;
+						skin.fullName = '★ ' + wepName + ' | ' + skin.name;
 						skin.rarity = 'unusual';
 					} else {
-						skin.fullName = '' + self._getWeaponNameFromTechnicalName(techName) + ' | ' + skin.name;
+						skin.fullName = '' + wepName + ' | ' + skin.name;
 						skin.rarity = self._getRarityFromPaintTechnicalName(datas.skinTechName);
 					}
 					skins.pushUniqueNamedObject(skin);
